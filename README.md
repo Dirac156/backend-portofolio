@@ -7,5 +7,5 @@
 
 ## Author
 
-Liliane Monkaya | github.com/liliene
-Dirac Murairi | github.com/dirac156
+* Liliane Monkaya | github.com/liliene
+* Dirac Murairi | github.com/dirac156
