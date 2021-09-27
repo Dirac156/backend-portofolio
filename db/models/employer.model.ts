@@ -21,7 +21,6 @@ interface Employee {
 };
 
 // employee mongodb schema
-
 const EmployeeSchema = new Schema<Employee>({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -38,7 +37,7 @@ const EmployeeSchema = new Schema<Employee>({
             required: true,
             enum: {
                 values: ['BIGINNER', 'INTERMEDIATE', 'ADVANCED'],
-                message: "{VALUE} not accepted"
+                message: "{VALUE} is not supported"
             }
         }
     }
