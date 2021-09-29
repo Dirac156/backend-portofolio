@@ -11,7 +11,7 @@ interface Worker{
     firstName: string,
     lastName: string,
     middleName?: string,
-    phone: number | string,
+    phone:  string,
     confirmed: boolean,
     email: string,
     country: string,
