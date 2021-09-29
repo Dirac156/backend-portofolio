@@ -46,3 +46,4 @@ const WorkerSchema = new Schema<Worker>({
 const WorkerModel = model<Worker>("worker", WorkerSchema);
 
 export { Worker, WorkerSchema, WorkerModel }
+
