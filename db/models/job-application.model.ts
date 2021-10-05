@@ -14,4 +14,4 @@ const JobApplicationSchema = new Schema<JobApplication> ({
 
 const JobApplicationModel = model<JobApplication>('job_application', JobApplicationSchema);
 
-export { JobApplication, JobApplicationModel };
+export { JobApplication, JobApplicationSchema, JobApplicationModel };

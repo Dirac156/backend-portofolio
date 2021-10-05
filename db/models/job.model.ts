@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import { JobApplication } from './job-application.model';
 
 interface Job {
     employeeId: string,
@@ -7,6 +8,7 @@ interface Job {
     jobTitle: string,
     numberOfWorker?: number,
     numberOfApplication?: number,
+    jobApplication: (JobApplication)[] 
 };
 
 const JobSchema = new Schema<Job> ({
@@ -16,6 +18,7 @@ const JobSchema = new Schema<Job> ({
     jobTitle: { type: String, required: true},
     numberOfApplication: { type: Number, required: false},
     numberOfWorker: { type: Number, required: false},
+    jobApplication: { type: [], required: false },
 })
 
 const JobModel = model<Job>('jobs', JobSchema);
