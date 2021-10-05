@@ -1,4 +1,5 @@
 import express, {Request, Response, Application} from 'express';
+import session from 'express-session';
 import helmet from 'helmet';
 import cors from 'cors';
 import { connectToDatabase } from './db/db';
@@ -10,6 +11,11 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json()); 
 app.use(helmet());
 app.use(cors());
+app.use(session({
+    secret: "the key that will sign cookie",
+    resave: false,
+    saveUninitialized: false  
+}))
 // app.use(router);
 app.use(function(req: Request, res: Response, next) {
     res.header("Access-Control-Allow-Origin", "*");
