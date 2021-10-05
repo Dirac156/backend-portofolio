@@ -2,7 +2,7 @@
  * Required External Modules and Interfaces
  */
 import express, { Request, Response } from "express";
-import * as WorkerService from './Workers.service'
+import * as WorkerService from './Workers.service';
 // import Worker from './worker-model.model'
 
 class WorkerController {
