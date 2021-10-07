@@ -7,6 +7,14 @@ interface skills{
     pastExperience: (string)[]
 }
 
+const skillsSchema = new Schema<skills>({
+    skillName: { type: String, required: true },
+    level: { type: String, required: true },
+    pastExperience: [],
+})
+
+const skillsModel = model<skills>("skills", skillsSchema);
+
 interface Worker{
     firstName: string,
     lastName: string,
@@ -14,9 +22,10 @@ interface Worker{
     phone:  string,
     confirmed: boolean,
     email: string,
+    password: string,
     country: string,
     city: string,
-    skills: skills,
+    skills: (skills)[],
 };
 
 // Worker mongodb schema
@@ -27,23 +36,13 @@ const WorkerSchema = new Schema<Worker>({
     phone: { type: String, required: true },
     confirmed: { type: Boolean, required: true },
     email: { type: String, required: true },
+    password: { type: String, required: true},
     country: { type: String, required: true },
     city: { type: String, required: true },
-    skills: {
-        skillName: { type: String, required: true },
-        level: {
-            type: String,
-            required: true,
-            enum: {
-                values: ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'],
-                message: "{VALUE} is not supported"
-            }
-        }
-    }
-
+    skills: { type: [], required: true}
 });
 
 const WorkerModel = model<Worker>("worker", WorkerSchema);
 
-export { Worker, WorkerSchema, WorkerModel }
+export { Worker, WorkerSchema, WorkerModel, skillsModel, skillsSchema, skills }
 

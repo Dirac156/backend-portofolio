@@ -1,7 +1,7 @@
 /* Required external modules and interfaces */
 
 import { Request, Response } from "express";
-import { WorkerModel } from "../db/models/worker-model.model";
+import { WorkerModel, skillsModel } from "../db/models/worker-model.model";
 import bcrypt from "bcrypt";
 import { GenerateToken, SendUserToken } from "../utils/utils";
 
@@ -16,6 +16,14 @@ export const CreateWorker = async ( req: Request, res: Response) => {
             res.status(200);
             res.send({ message: "WORKER ALREADY EXISTS" });
             return;
+        }
+
+        const skills = await skillsModel.create(worker.skills);
+
+        if ( skills ) {
+            worker.skills = [ skills ]
+        } else {
+            worker.skills = []
         }
 
         // Here we generate a confirmation and reset token

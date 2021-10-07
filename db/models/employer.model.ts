@@ -2,12 +2,6 @@ import { Schema, model } from 'mongoose';
 
 // creat employee data type.
 
-interface skills{
-    skillname: string,
-    level: 'BIGINNER' | 'INTERMEDIATE' | 'ADVANCED',
-    pastExperience: (string)[]
-}
-
 interface Employer {
     firstName: string,
     lastName: string,
@@ -15,6 +9,7 @@ interface Employer {
     phone: string,
     confirmed: boolean,
     email: string,
+    password: string,
     country: string,
     city: string,
     user: string,
@@ -30,6 +25,7 @@ const EmployerSchema = new Schema<Employer>({
     phone: { type: String, required: true },
     confirmed: { type: Boolean, required: true },
     email: { type: String, required: true },
+    password: { type: String, required: true},
     country: { type: String, required: true },
     city: { type: String, required: true },
     user: { type: String, required: true},
