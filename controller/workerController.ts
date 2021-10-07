@@ -18,7 +18,11 @@ export const CreateWorker = async ( req: Request, res: Response) => {
             return;
         }
 
-        const skills = await skillsModel.create(worker.skills);
+        // create new skill document for the user if provided.
+
+        let skills;
+        
+        if ( worker.skills ) { skills = await skillsModel.create(worker.skills)};
 
         if ( skills ) {
             worker.skills = [ skills ]
