@@ -1,8 +1,9 @@
 import express, {Request, Response, Application} from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
-import { connectToDatabase } from './db/db';
+import { connectToDatabase } from "../db/db.js";
 import router from './router/index';
+import session from 'express-session';
 
 const app:Application = express();
 
@@ -22,7 +23,6 @@ const PORT = process.env.PORT || 8000;
 
 app.get("/", (req:Request, res:Response):void => {
     res.send("Hello Typescript with Node.js!");
-    console.log(req.session);
 });
 
 const server = app.listen(PORT, ():void => {
@@ -30,8 +30,14 @@ const server = app.listen(PORT, ():void => {
 });
 
 
-connectToDatabase().then((response: boolean) => {
-        console.log(`database connection: ${response ? 'successed' : 'failed'}`)
+connectToDatabase().then(({ client, store }: any) => {
+        console.log(`database connection: ${client ? 'successed' : 'failed'}`)
+        app.use(session({
+            secret: "this is the secret key",
+            resave: false,
+            saveUninitialized: false,
+            store: store,
+        }))
     }).catch((error: any) => {
         console.log(error);
         console.log("closing server");

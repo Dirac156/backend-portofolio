@@ -30,7 +30,7 @@ export const CreateEmployer = async (req:Request, res: Response) => {
                     SendUserToken(createdUser);
                     const response =  "ROW ADDED";
                     res.status(200);
-                    res.send({ message: "ROW ADDED", 'data' : createdUser });
+                    res.send({ message: "ROW ADDED", data : createdUser });
                 } else {
                     const response =  "ROW_NOT_ADDED";
                     res.status(400);
@@ -44,10 +44,9 @@ export const CreateEmployer = async (req:Request, res: Response) => {
         console.log(error);
         res.status(500);
         res.send("Internal Error");
-    } 
-
-
-
-
-
+    };
 } 
+
+export const login = (req: Request, res: Response) => {
+
+}
