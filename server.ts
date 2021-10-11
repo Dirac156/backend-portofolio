@@ -1,7 +1,7 @@
 import express, {Request, Response, Application} from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
-// import { connectToDatabase } from './db/db';
+import { connectToDatabase } from './db/db';
 // import router from './routes/routes';
 
 const app:Application = express();
@@ -29,12 +29,12 @@ const server = app.listen(PORT, ():void => {
 });
 
 
-// connectToDatabase().then((response: boolean) => {
-//         console.log(`database connection: ${response ? 'successed' : 'failed'}`)
-//     }).catch((error: any) => {
-//         console.log(error);
-//         console.log("closing server");
-//         server.close();
-//     }
-// );
+connectToDatabase().then(({ client, sessionStore} ) => {
+        console.log(`database connection: ${client ? 'successed' : 'failed'}`)
+    }).catch((error: any) => {
+        console.log(error);
+        console.log("closing server");
+        server.close();
+    }
+);
 
