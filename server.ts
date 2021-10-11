@@ -2,7 +2,7 @@ import express, {Request, Response, Application} from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import { connectToDatabase } from './db/db';
-// import router from './routes/routes';
+import router from './router/index';
 
 const app:Application = express();
 
@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json()); 
 app.use(helmet());
 app.use(cors());
-// app.use(router);
+app.use(router);
 app.use(function(req: Request, res: Response, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -29,7 +29,7 @@ const server = app.listen(PORT, ():void => {
 });
 
 
-connectToDatabase().then(({ client, sessionStore} ) => {
+connectToDatabase().then((client: any ) => {
         console.log(`database connection: ${client ? 'successed' : 'failed'}`)
     }).catch((error: any) => {
         console.log(error);
