@@ -70,7 +70,7 @@
     },
     "include": [
       "**/*.ts"
-, "db/db.js"    ],
+, "db/db.ts"    ],
     "exclude": [
       "node_modules"
     ]

@@ -1,9 +1,8 @@
 import express, {Request, Response, Application} from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
-import { connectToDatabase } from "../db/db.js";
+import { connectToDatabase } from "./db/db";
 import router from './router/index';
-import session from 'express-session';
 
 const app:Application = express();
 
@@ -30,14 +29,8 @@ const server = app.listen(PORT, ():void => {
 });
 
 
-connectToDatabase().then(({ client, store }: any) => {
+connectToDatabase().then((client: any) => {
         console.log(`database connection: ${client ? 'successed' : 'failed'}`)
-        app.use(session({
-            secret: "this is the secret key",
-            resave: false,
-            saveUninitialized: false,
-            store: store,
-        }))
     }).catch((error: any) => {
         console.log(error);
         console.log("closing server");
