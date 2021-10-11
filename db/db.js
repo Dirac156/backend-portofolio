@@ -1,4 +1,4 @@
-import { connect } from 'mongoose';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -9,7 +9,7 @@ export const connectToDatabase = () => {
     const promise = new Promise( async (resolve, reject) => {
         try {
             const uri = `mongodb+srv://${DB_NAME}:${DB_PASS}@cluster0.7ujj0.mongodb.net/${DB}?retryWrites=true&w=majority`;
-            const client = await connect(uri);
+            const client = await mongoose.connect(uri);
             resolve(client);
         } catch(error) {
             reject(error);

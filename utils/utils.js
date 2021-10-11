@@ -1,24 +1,15 @@
 import nodemailer from 'nodemailer';
-import Jwt, { Secret } from 'jsonwebtoken';
+import Jwt from 'jsonwebtoken';
 import jwt_decode from "jwt-decode";
 import dotenv from "dotenv";
-import { Employer } from "../db/models/employer.model";
-import { Worker } from "../db/models/worker-model.model";
 
 dotenv.config();
 
 import { env } from 'process';
-import { Request } from 'express';
 
-const SecretKey: Secret = env.JWT_SECURITY_KEY as Secret;
+const SecretKey = env.JWT_SECURITY_KEY;
 
-export const RULES = {
-    ADMIN: 'ADMIN',
-    USER: 'USER',
-    DEVElOPPER: 'DEVELOPPER'
-};
-
-export const GenerateToken: Function = (user: Employer | Worker ) => {
+export const GenerateToken = (user ) => {
     const Token = Jwt.sign({
         email: user.email, firstName: user.firstName, lastName: user.lastName
     }, SecretKey,
@@ -27,12 +18,12 @@ export const GenerateToken: Function = (user: Employer | Worker ) => {
     return Token;
 }
 
-export const decodeToken = (req: Request, header: boolean=false, token: boolean | string =true) => { 
+export const decodeToken = (req, header=false, token =true) => { 
   // if (header) return jwt_decode(req?.headers?.authorization?.split(" ")[1]);
   if (token) return jwt_decode(req.params.token);
 };
 
-const sendEmail = async (emailOptions: any) => {
+const sendEmail = async (emailOptions) => {
     const transporter = await nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -41,7 +32,7 @@ const sendEmail = async (emailOptions: any) => {
         }
       });
 
-    await transporter.sendMail(emailOptions, function(error: any, info: any){
+    await transporter.sendMail(emailOptions, function(error, info){
         if (error) {
           console.log(error);
         } else {
@@ -52,7 +43,7 @@ const sendEmail = async (emailOptions: any) => {
     
   };
 
-export const SendUserToken = async (clientsDeatils: any ) => {   
+export const SendUserToken = async (clientsDeatils ) => {   
 
     const { email, confirmationToken } = clientsDeatils;
 

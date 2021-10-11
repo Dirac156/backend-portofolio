@@ -1,26 +1,7 @@
 import { Schema, model } from 'mongoose';
 
-// Worker data type
-interface skills{
-    skillName: string,
-    level: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED',
-    pastExperience: (string)[]
-}
-
-interface Worker{
-    firstName: string,
-    lastName: string,
-    middleName?: string,
-    phone:  string,
-    confirmed: boolean,
-    email: string,
-    country: string,
-    city: string,
-    skills: skills,
-};
-
 // Worker mongodb schema
-const WorkerSchema = new Schema<Worker>({
+const WorkerSchema = new Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     middleName: { type: String, required: false },
@@ -43,7 +24,7 @@ const WorkerSchema = new Schema<Worker>({
 
 });
 
-const WorkerModel = model<Worker>("worker", WorkerSchema);
+const WorkerModel = model("worker", WorkerSchema);
 
-export { Worker, WorkerSchema, WorkerModel }
+export { WorkerModel }
 
