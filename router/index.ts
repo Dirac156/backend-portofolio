@@ -3,6 +3,6 @@ import { CreateWorker } from '../controller/workerController';
 
 const router = Router();
 
-router.get('/worker', CreateWorker);
+router.post('/worker', CreateWorker);
 
 export default router;
