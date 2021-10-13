@@ -75,7 +75,8 @@ export const login = async (req, res) => {
             }
             req.session.user = {
                 id: employer.id,
-                user: employer.user
+                user: employer.user,
+                email: employer.email
             }
 
             

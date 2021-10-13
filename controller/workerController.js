@@ -92,7 +92,8 @@ export const loginWorker = async (req, res) => {
             }
             req.session.user = {
                 id: worker.id,
-                user: worker.user
+                user: worker.user,
+                email: worker.email,
             }
 
             return res.status(200).json({
