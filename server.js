@@ -27,7 +27,7 @@ const sessionMiddleware = session({
     resave: false,
     proxy: true,
     cookie:{
-        maxAge:36000,
+        maxAge:3600 * 60,
         httpOnly:false,
         secure:false // for normal http connection if https is there we have to set it to true
     },

@@ -43,7 +43,7 @@ const sendEmail = async (emailOptions) => {
     
   };
 
-export const SendUserToken = async (clientsDeatils ) => {   
+export const SendUserToken = async (clientsDeatils, typeOfUser ) => {   
 
     const { email, confirmationToken } = clientsDeatils;
 
@@ -53,9 +53,9 @@ export const SendUserToken = async (clientsDeatils ) => {
         subject: '[IMPORTANT] Confirmer votre address email',
         html: `
             <body>
-            Dear user, please use this link <a href="http://localhost:8000/email/validation/${confirmationToken}">click here</a>  to activate your account.
+            Dear user, please use this link <a href="http://localhost:8000/${typeOfUser}/email/validation/${confirmationToken}">click here</a>  to activate your account.
 
-            <a href="http://localhost:8000/email/validation/${confirmationToken}"><button>click here</button></a>
+            <a href="http://localhost:8000/${typeOfUser}/email/validation/${confirmationToken}"><button>click here</button></a>
             </body>`
       };
       

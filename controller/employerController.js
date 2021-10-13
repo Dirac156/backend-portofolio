@@ -29,7 +29,7 @@ export const CreateEmployer = async (req, res) => {
                 employer.password = hash;
                 const createdUser = await EmployerModel.create(employer);
                 if (createdUser) {
-                    SendUserToken(createdUser);
+                    SendUserToken(createdUser, "employer");
                     const response =  "ROW ADDED";
                     res.status(200);
                     res.send({ message: "ROW ADDED", data : createdUser });
@@ -52,7 +52,7 @@ export const CreateEmployer = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const { password, email } = req.body;
-        let employer = await EmployerModel.findOne({ where: { email: email } })
+        let employer = await EmployerModel.findOne({ email: email })
         if (!employer) {
             return res.status(401).json({
                 status: false,
@@ -74,8 +74,11 @@ export const login = async (req, res) => {
                 })
             }
             req.session.user = {
-                id: employer.id
+                id: employer.id,
+                user: employer.user
             }
+
+            
 
             return res.status(200).json({
                 status: true,
@@ -134,7 +137,6 @@ export const RejectEmployer = (req, res) => {
     try {
         const userId = req.session.user ? req.session.user.id : req.params.id;
 
-        console.log(userId);
         // Find the student
         EmployerModel.deleteOne({ id: userId }, function(err) {
             if (!err) {
