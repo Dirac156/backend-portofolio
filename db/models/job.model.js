@@ -1,17 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { JobApplication } from './job-application.model';
 
-interface Job {
-    employeeId: string,
-    jobDescription: string,
-    skills: (string)[],
-    jobTitle: string,
-    numberOfWorker?: number,
-    numberOfApplication?: number,
-    jobApplication: (JobApplication)[] 
-};
-
-const JobSchema = new Schema<Job> ({
+const JobSchema = new Schema ({
     employeeId: { type: String, required: true},
     jobDescription: { type: String, required: true},
     skills: { type: [], required: true},
@@ -21,6 +11,6 @@ const JobSchema = new Schema<Job> ({
     jobApplication: { type: [], required: false },
 })
 
-const JobModel = model<Job>('jobs', JobSchema);
+const JobModel = model('jobs', JobSchema);
 
-export { Job, JobModel };
+export { JobModel };

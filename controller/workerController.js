@@ -1,15 +1,15 @@
 /**
  * Required External Modules and Interfaces
  */
-import express, { Request, Response } from "express";
+import express from "express";
 import * as WorkerService from './Workers.service';
 // import Worker from './worker-model.model'
 
 class WorkerController {
-    public path = '/workers';
-    public router = express.Router();
+    path = '/workers';
+    router = express.Router();
 
-    private workers: Worker[] = [
+    workers = [
         
     ];
 
@@ -17,16 +17,16 @@ class WorkerController {
         this.initializeRoutes();
     }
 
-    public initializeRoutes() {
+    initializeRoutes() {
         this.router.get(this.path, this.getAllWorkers);
         this.router.post(this.path, this.createAWorker);
         this.router.patch(this.path, this.updateAWorker);
         this.router.delete(this.path, this.deleteAWorker);
     }
 
-    getAllWorkers = async (request: express.Request, response: express.Response) => {
+    getAllWorkers = async (request, response) => {
         try {
-            const workers: Worker[] = await WorkerService.findAll();
+            const workers = await WorkerService.findAll();
 
             response.status(200).send(workers);
 
@@ -37,19 +37,19 @@ class WorkerController {
         response.send(this.workers);
     }
 
-    createAWorker = (request: express.Request, response: express.Response) => {
-        const worker: Worker = request.body;
+    createAWorker = (request, response) => {
+        const worker = request.body;
         this.workers.push(worker);
         response.send(worker);
     }
 
-    updateAWorker = (request: express.Request, response: express.Response) => {
-        const worker: Worker = request.body;
+    updateAWorker = (request, response) => {
+        const worker = request.body;
         this.workers.push(worker);
         response.send(worker);
     }
 
-    deleteAWorker = (request: express.Request, response: express.Response) => {
+    deleteAWorker = (request, response) => {
         response.send(this.workers)
     }
 }
